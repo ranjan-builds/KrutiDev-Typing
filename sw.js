@@ -1,9 +1,10 @@
-const CACHE_NAME = "krutidev-master-v2";
+const CACHE_NAME = "krutidev-master-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./Krutidev.ttf",
+  "./og.png",
   "./icons/icon.svg"
 ];
 
