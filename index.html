@@ -1,0 +1,1745 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Kruti Dev 010 Typing Master | Hindi Typing Practice</title>
+    <meta name="description" content="Practice Hindi typing with the Kruti Dev 010 keyboard layout. Improve speed and accuracy through guided lessons, typing tests, exam mode, and free practice." />
+    <meta name="keywords" content="Kruti Dev typing, Kruti Dev 010, Hindi typing practice, Hindi typing test, Kruti Dev keyboard, Hindi typing master" />
+    <meta name="author" content="Ranjan Builds" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://your-domain.com/" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/icon.svg" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="KrutiDev Master" />
+
+    <!-- Replace your-domain.com with the live site domain before deployment. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kruti Dev Master" />
+    <meta property="og:title" content="Kruti Dev 010 Typing Master" />
+    <meta property="og:description" content="Learn and practice Hindi typing with Kruti Dev 010 lessons, tests, exam mode, and free typing." />
+    <meta property="og:url" content="https://your-domain.com/" />
+    <meta property="og:image" content="https://your-domain.com/og-image.png" />
+    <meta property="og:image:secure_url" content="https://your-domain.com/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Kruti Dev 010 Typing Master - Hindi typing practice" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kruti Dev 010 Typing Master" />
+    <meta name="twitter:description" content="Practice Hindi typing with Kruti Dev 010 lessons, typing tests, exam mode, and free typing." />
+    <meta name="twitter:image" content="https://your-domain.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Kruti Dev 010 Typing Master - Hindi typing practice" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js").catch((error) => {
+            console.warn("Service worker registration failed:", error);
+          });
+        });
+      }
+
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              kruti: ["Kruti Dev 010", "sans-serif"],
+            },
+            colors: {
+              primary: {
+                50: "#ecfdf5",
+                100: "#d1fae5",
+                300: "#6ee7b7",
+                400: "#34d399",
+                500: "#10b981",
+                600: "#059669",
+                700: "#047857",
+                900: "#064e3b",
+              },
+              slate: {
+                750: "#293548",
+                800: "#1e293b",
+                850: "#162032",
+                900: "#0f172a",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      @font-face {
+        font-family: "Kruti Dev 010";
+        src: url("./Krutidev.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0f172a;
+        color: #e2e8f0;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .kruti-text {
+        font-family: "Kruti Dev 010", sans-serif;
+        font-size: 1.5rem;
+        line-height: 1.6;
+        letter-spacing: 1px;
+      }
+      @media (min-width: 768px) {
+        .kruti-text {
+          font-size: 1.75rem;
+        }
+      }
+
+      #free-typing-pad::placeholder {
+        font-family: "Inter", sans-serif;
+        font-size: 1.15rem;
+        color: #64748b;
+        letter-spacing: normal;
+        opacity: 0.8;
+      }
+
+      .typing-container {
+        position: relative;
+        outline: none;
+        user-select: none;
+      }
+      .char {
+        color: #64748b;
+        transition: color 0.1s;
+      }
+      .char.correct {
+        color: #34d399;
+      }
+      .char.incorrect {
+        color: #f87171;
+        background-color: rgba(225, 29, 72, 0.2);
+        border-radius: 2px;
+      }
+      .char.active {
+        color: #ffffff;
+        background-color: #334155;
+        border-radius: 2px;
+        position: relative;
+      }
+      .char.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #10b981;
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .keyboard-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0.35rem;
+        gap: 0.25rem;
+      }
+      .key {
+        background-color: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 0.375rem;
+        padding: 0.25rem;
+        min-width: 2rem;
+        height: 2.75rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 0 #0f172a;
+        cursor: pointer;
+        transition: all 0.1s;
+        position: relative;
+        color: #f8fafc;
+      }
+      @media (min-width: 768px) {
+        .key {
+          min-width: 2.5rem;
+          height: 3rem;
+          gap: 0.25rem;
+          padding: 0.5rem;
+        }
+      }
+      .key:active,
+      .key.pressed {
+        transform: translateY(2px);
+        box-shadow: 0 0 0 transparent;
+        background-color: #064e3b;
+        border-color: #059669;
+      }
+      .key.highlight {
+        background-color: #854d0e;
+        border-color: #ca8a04;
+        box-shadow: 0 2px 0 #713f12;
+      }
+
+      .key-main {
+        font-family: "Kruti Dev 010";
+        font-size: 1.1rem;
+      }
+      .key-sub {
+        font-size: 0.55rem;
+        color: #94a3b8;
+        position: absolute;
+        top: 2px;
+        right: 4px;
+      }
+      .key-shift {
+        font-family: "Kruti Dev 010";
+        font-size: 0.75rem;
+        color: #64748b;
+        position: absolute;
+        top: 2px;
+        left: 4px;
+      }
+
+      .key-wide {
+        min-width: 3.5rem;
+      }
+      .key-wider {
+        min-width: 4.5rem;
+      }
+      .key-space {
+        min-width: 12rem;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #475569;
+        border-radius: 4px;
+      }
+      .modal-overlay {
+        background-color: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(5px);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav
+      class="bg-slate-800 shadow-sm sticky top-0 z-40 border-b border-slate-700"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex justify-between h-14">
+          <div
+            class="flex items-center cursor-pointer"
+            onclick="app.navigate('dashboard')"
+          >
+            <i class="fa-solid fa-keyboard text-primary-500 text-xl mr-2"></i>
+            <span class="font-bold text-lg tracking-tight text-white"
+              >KrutiDev</span
+            >
+          </div>
+
+          <div class="hidden md:flex space-x-1 items-center">
+            <button
+              onclick="app.navigate('dashboard')"
+              class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition"
+            >
+              Home
+            </button>
+            <button
+              onclick="app.navigate('lessons')"
+              class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition"
+            >
+              Lessons
+            </button>
+            <button
+              onclick="app.navigate('tests')"
+              class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition"
+            >
+              Tests
+            </button>
+            <button
+              onclick="app.navigate('exam')"
+              class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition"
+            >
+              Exam
+            </button>
+            <button
+              onclick="app.navigate('cheatsheet')"
+              class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition"
+            >
+              <i class="fa-solid fa-map text-primary-400 mr-1"></i> Chart
+            </button>
+            <button
+              onclick="app.navigate('freetyping')"
+              class="ml-2 px-3 py-1.5 rounded-md text-sm font-medium text-primary-400 bg-primary-900/30 hover:bg-primary-900/50 transition border border-primary-900/50"
+            >
+              Free Typing
+            </button>
+          </div>
+
+          <div class="flex items-center space-x-3 md:hidden">
+            <div
+              class="flex items-center space-x-1 text-xs font-bold text-primary-400 bg-slate-900 px-2 py-1 rounded-full border border-slate-700"
+            >
+              <i class="fa-solid fa-star text-yellow-500 text-[10px]"></i>
+              <span id="mobile-nav-xp">0</span>
+            </div>
+            <button
+              id="mobile-menu-btn"
+              class="text-slate-400 hover:text-white p-2"
+            >
+              <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-slate-800 border-t border-slate-700 absolute w-full shadow-xl"
+      >
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <button
+            onclick="
+              app.navigate('dashboard');
+              app.toggleMobileMenu();
+            "
+            class="block w-full text-left px-3 py-2 rounded-md font-medium text-slate-300 hover:bg-slate-700"
+          >
+            Home
+          </button>
+          <button
+            onclick="
+              app.navigate('lessons');
+              app.toggleMobileMenu();
+            "
+            class="block w-full text-left px-3 py-2 rounded-md font-medium text-slate-300 hover:bg-slate-700"
+          >
+            Lessons
+          </button>
+          <button
+            onclick="
+              app.navigate('tests');
+              app.toggleMobileMenu();
+            "
+            class="block w-full text-left px-3 py-2 rounded-md font-medium text-slate-300 hover:bg-slate-700"
+          >
+            Tests
+          </button>
+          <button
+            onclick="
+              app.navigate('exam');
+              app.toggleMobileMenu();
+            "
+            class="block w-full text-left px-3 py-2 rounded-md font-medium text-slate-300 hover:bg-slate-700"
+          >
+            Exam Mode
+          </button>
+          <button
+            onclick="
+              app.navigate('cheatsheet');
+              app.toggleMobileMenu();
+            "
+            class="block w-full text-left px-3 py-2 rounded-md font-medium text-primary-400 hover:bg-slate-700"
+          >
+            <i class="fa-solid fa-map mr-2"></i> Kruti Dev Chart
+          </button>
+          <button
+            onclick="
+              app.navigate('freetyping');
+              app.toggleMobileMenu();
+            "
+            class="block w-full text-left px-3 py-2 rounded-md font-medium text-primary-400 bg-primary-900/20"
+          >
+            Free Typing
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main
+      id="app-container"
+      class="flex-grow w-full max-w-5xl mx-auto px-4 py-4 md:py-6"
+    ></main>
+
+    <footer class="bg-[#0b1120] border-t border-slate-800 mt-auto">
+      <div
+        class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4"
+      >
+        <div
+          class="text-slate-400 text-sm flex items-center justify-center gap-1"
+        >
+          Made with
+          <i class="fa-solid fa-heart text-rose-500 mx-1 animate-pulse"></i> for
+          Anjali · Crafted by
+          <span class="font-semibold text-primary-400 ml-1">Ranjan</span>
+        </div>
+        <div class="flex items-center gap-5">
+          <a
+            href="https://github.com/ranjan-builds"
+            target="_blank"
+            class="text-slate-500 hover:text-white transition-colors text-xl"
+            title="GitHub"
+            ><i class="fa-brands fa-github"></i
+          ></a>
+          <a
+            href="mailto:ranjankashyap6475@gmail.com"
+            class="text-slate-500 hover:text-primary-400 transition-colors text-xl"
+            title="Email Me"
+            ><i class="fa-solid fa-envelope"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Templates -->
+
+    <!-- Dashboard -->
+    <template id="tpl-dashboard">
+      <div class="space-y-4 animate-fade-in">
+        <div
+          class="text-center py-6 md:py-8 bg-gradient-to-br from-slate-800 to-primary-900/40 border border-slate-700 rounded-2xl relative overflow-hidden"
+        >
+          <div class="relative z-10 px-4">
+            <h1 class="text-2xl md:text-3xl font-bold mb-2 text-white">
+              Kruti Dev 010 Mastery
+            </h1>
+            <p
+              class="text-sm md:text-base text-primary-100 mb-6 max-w-md mx-auto opacity-80"
+            >
+              Boost your Hindi typing speed for competitive exams.
+            </p>
+            <div class="flex justify-center gap-3">
+              <button
+                onclick="app.navigate('freetyping')"
+                class="bg-primary-600 text-white font-semibold py-2.5 px-6 rounded-lg hover:bg-primary-500 shadow-lg shadow-primary-900/50 transition text-sm md:text-base"
+              >
+                <i class="fa-solid fa-keyboard mr-2"></i> Free Typing
+              </button>
+              <button
+                onclick="app.navigate('cheatsheet')"
+                class="bg-slate-700 border border-slate-600 text-white font-semibold py-2.5 px-6 rounded-lg hover:bg-slate-600 transition text-sm md:text-base"
+              >
+                <i class="fa-solid fa-map mr-2"></i> Chart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div
+            class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex flex-col items-center"
+          >
+            <span class="text-xs text-slate-400 uppercase tracking-wide"
+              >Best WPM</span
+            >
+            <div class="text-xl font-bold text-primary-400">
+              <span id="stat-best-wpm">0</span>
+            </div>
+          </div>
+          <div
+            class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex flex-col items-center"
+          >
+            <span class="text-xs text-slate-400 uppercase tracking-wide"
+              >Accuracy</span
+            >
+            <div class="text-xl font-bold text-primary-400">
+              <span id="stat-avg-acc">0</span>%
+            </div>
+          </div>
+          <div
+            class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex flex-col items-center"
+          >
+            <span class="text-xs text-slate-400 uppercase tracking-wide"
+              >Lessons</span
+            >
+            <div class="text-xl font-bold text-blue-400">
+              <span id="stat-lessons">0</span>/10
+            </div>
+          </div>
+          <div
+            class="bg-slate-800 p-3 rounded-xl border border-slate-700 flex flex-col items-center"
+          >
+            <span class="text-xs text-slate-400 uppercase tracking-wide"
+              >Streak</span
+            >
+            <div class="text-xl font-bold text-orange-400">
+              <i class="fa-solid fa-fire mr-1"></i
+              ><span id="stat-streak">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-3 mt-4">
+          <div
+            onclick="app.navigate('lessons')"
+            class="bg-slate-800 rounded-xl border border-slate-700 p-4 cursor-pointer hover:border-primary-500 transition flex items-center group"
+          >
+            <div
+              class="w-10 h-10 bg-blue-900/40 text-blue-400 rounded-lg flex items-center justify-center text-lg mr-4 group-hover:scale-110 transition-transform"
+            >
+              <i class="fa-solid fa-book"></i>
+            </div>
+            <div class="flex-grow">
+              <h3 class="font-bold text-white text-sm md:text-base">Lessons</h3>
+              <div class="w-full bg-slate-700 rounded-full h-1.5 mt-2">
+                <div
+                  class="bg-blue-500 h-1.5 rounded-full"
+                  id="lesson-progress-bar"
+                  style="width: 0%"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div
+            onclick="app.navigate('tests')"
+            class="bg-slate-800 rounded-xl border border-slate-700 p-4 cursor-pointer hover:border-purple-500 transition flex items-center group"
+          >
+            <div
+              class="w-10 h-10 bg-purple-900/40 text-purple-400 rounded-lg flex items-center justify-center text-lg mr-4 group-hover:scale-110 transition-transform"
+            >
+              <i class="fa-solid fa-stopwatch"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-white text-sm md:text-base">
+                Speed Tests
+              </h3>
+              <p class="text-slate-400 text-xs">Timed paragraph practice</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Lists -->
+    <template id="tpl-list">
+      <div class="max-w-3xl mx-auto animate-fade-in">
+        <h1
+          class="text-2xl font-bold text-white mb-4 flex items-center gap-2"
+          id="list-title"
+        >
+          Select Module
+        </h1>
+        <div class="grid gap-3" id="list-container"></div>
+      </div>
+    </template>
+
+    <!-- Free Typing Sandbox -->
+    <template id="tpl-freetyping">
+      <div
+        class="max-w-4xl mx-auto animate-fade-in flex flex-col h-[calc(100vh-140px)] md:h-[calc(100vh-160px)]"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <h1 class="text-xl md:text-2xl font-bold text-white">
+            <i class="fa-solid fa-keyboard text-primary-500 mr-2"></i> Free
+            Typing Sandbox
+          </h1>
+          <button
+            onclick="document.getElementById('free-typing-pad').value = ''"
+            class="px-4 py-2 bg-slate-700 text-white text-sm rounded-lg hover:bg-slate-600 transition shadow-sm font-medium"
+          >
+            <i class="fa-solid fa-eraser mr-1"></i> Clear
+          </button>
+        </div>
+        <!-- Clean sandbox textarea with strictly no spellcheck or auto-correction -->
+        <textarea
+          id="free-typing-pad"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="none"
+          spellcheck="false"
+          class="w-full flex-grow bg-slate-800/80 border border-slate-700 rounded-xl p-5 md:p-8 kruti-text text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all resize-none shadow-inner"
+          placeholder="हाय अंजली दिस इस रंजन हियर , स्टार्ट टायपिंग ..  "
+        ></textarea>
+      </div>
+    </template>
+
+    <!-- Cheatsheet -->
+    <template id="tpl-cheatsheet">
+      <div class="max-w-4xl mx-auto animate-fade-in space-y-6">
+        <div class="flex items-center justify-between">
+          <h1 class="text-2xl font-bold text-white">
+            <i class="fa-solid fa-map text-primary-400 mr-2"></i> Kruti Dev 010
+            Chart
+          </h1>
+          <button
+            onclick="app.navigate('dashboard')"
+            class="text-slate-400 hover:text-white"
+          >
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
+        </div>
+        <div
+          class="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden shadow-lg"
+        >
+          <div
+            class="bg-slate-750 px-4 py-2 font-semibold text-sm border-b border-slate-700 text-slate-200"
+          >
+            Keyboard Mapping (English to Hindi)
+          </div>
+          <div class="p-0 overflow-x-auto">
+            <table class="w-full text-left text-sm whitespace-nowrap">
+              <thead
+                class="bg-slate-900/50 text-slate-400 text-xs uppercase tracking-wider"
+              >
+                <tr>
+                  <th class="px-4 py-3">Row</th>
+                  <th class="px-4 py-3">English Key</th>
+                  <th class="px-4 py-3">Normal (w/o Shift)</th>
+                  <th class="px-4 py-3 text-primary-400">With Shift</th>
+                </tr>
+              </thead>
+              <tbody
+                class="divide-y divide-slate-700/50 text-slate-200"
+                id="chart-keys-body"
+              ></tbody>
+            </table>
+          </div>
+        </div>
+        <div
+          class="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden mb-8 shadow-lg"
+        >
+          <div
+            class="bg-slate-750 px-4 py-2 font-semibold text-sm border-b border-slate-700 text-slate-200"
+          >
+            Important Alt Codes
+          </div>
+          <div
+            id="alt-codes-container"
+            class="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-700/50 p-px"
+          ></div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Typing Interface -->
+    <template id="tpl-practice">
+      <div
+        class="flex flex-col h-[calc(100vh-160px)] md:h-[calc(100vh-170px)] animate-fade-in relative"
+      >
+        <div
+          class="bg-slate-800 p-2 md:p-3 rounded-xl border border-slate-700 mb-3 flex justify-between items-center text-sm shadow-sm"
+        >
+          <button
+            onclick="app.handleBackNavigation()"
+            class="text-slate-400 hover:text-white px-2 transition-colors"
+          >
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+
+          <div class="flex gap-4 md:gap-8 font-bold">
+            <div class="flex flex-col items-center">
+              <span class="text-[10px] text-slate-500 uppercase tracking-widest"
+                >WPM</span
+              ><span id="live-wpm" class="text-primary-400 text-lg">0</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <span class="text-[10px] text-slate-500 uppercase tracking-widest"
+                >Acc</span
+              ><span id="live-acc" class="text-primary-400 text-lg">100</span>
+            </div>
+            <div class="flex flex-col items-center" id="timer-container">
+              <span class="text-[10px] text-slate-500 uppercase tracking-widest"
+                >Time</span
+              ><span id="live-time" class="text-white text-lg font-mono"
+                >00:00</span
+              >
+            </div>
+          </div>
+
+          <div class="flex gap-2 items-center">
+            <button
+              onclick="app.toggleSound()"
+              id="btn-sound"
+              class="text-slate-400 px-2 transition-colors"
+              title="Toggle Sound"
+            >
+              <i class="fa-solid fa-volume-xmark"></i>
+            </button>
+            <button
+              onclick="app.toggleVibration()"
+              id="btn-vibrate"
+              class="text-slate-400 px-2 transition-colors md:hidden"
+              title="Toggle Vibration"
+            >
+              <i class="fa-solid fa-mobile-screen"></i>
+            </button>
+            <button
+              onclick="app.typingEngine.restart()"
+              class="text-slate-400 hover:text-primary-400 px-2 transition-colors border-l border-slate-600 pl-3 ml-1"
+            >
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="bg-slate-800 p-4 md:p-6 rounded-xl border border-slate-700 mb-3 flex-grow flex flex-col relative overflow-hidden shadow-inner"
+          id="typing-area-wrapper"
+        >
+          <div class="w-full bg-slate-900 rounded-full h-1.5 mb-3">
+            <div
+              class="bg-primary-500 h-1.5 rounded-full transition-all"
+              id="typing-progress-bar"
+              style="width: 0%"
+            ></div>
+          </div>
+
+          <!-- Optimized mobile text input configuration -->
+          <input
+            type="text"
+            inputmode="text"
+            id="hidden-input"
+            class="absolute opacity-0 w-1 h-1 -z-10"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="none"
+            spellcheck="false"
+          />
+
+          <div
+            id="typing-container"
+            class="typing-container kruti-text flex-grow overflow-y-auto cursor-text text-left break-words focus:outline-none"
+            tabindex="0"
+          ></div>
+
+          <div
+            id="typing-overlay"
+            class="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex flex-col items-center justify-center z-10 cursor-pointer"
+          >
+            <div
+              class="w-14 h-14 bg-primary-600 rounded-full flex items-center justify-center text-white text-2xl mb-3 shadow-lg shadow-primary-900/50 animate-pulse"
+            >
+              <i class="fa-solid fa-play ml-1"></i>
+            </div>
+            <h3 class="font-bold text-white text-sm md:text-base tracking-wide">
+              Tap to start typing
+            </h3>
+          </div>
+        </div>
+
+        <div
+          class="hidden md:block bg-slate-800 p-2 md:p-4 rounded-xl border border-slate-700 shadow-sm"
+          id="virtual-keyboard"
+        ></div>
+        <button
+          onclick="app.toggleVirtualKeyboard()"
+          class="md:hidden w-full py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-slate-300 mt-auto hover:bg-slate-750"
+        >
+          <i class="fa-solid fa-keyboard mr-1 text-primary-400"></i> Toggle
+          Virtual Keyboard
+        </button>
+      </div>
+    </template>
+
+    <!-- Result Modal -->
+    <div
+      id="result-modal"
+      class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-slate-800 border border-slate-700 w-full max-w-sm rounded-2xl shadow-2xl p-6 text-center transform transition-all border-t-4 border-t-primary-500"
+      >
+        <div
+          class="w-14 h-14 rounded-full flex items-center justify-center text-2xl mx-auto mb-3 shadow-inner"
+          id="result-icon"
+        >
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <h2 class="text-xl font-bold text-white mb-1" id="result-title">
+          Complete!
+        </h2>
+        <p
+          class="text-xs text-primary-400 font-bold tracking-widest mb-5"
+          id="result-msg"
+        >
+          +50 XP
+        </p>
+        <div class="grid grid-cols-2 gap-3 mb-6 text-left">
+          <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+            <div class="text-[10px] text-slate-400 uppercase tracking-wider">
+              Speed
+            </div>
+            <div class="text-2xl font-bold text-primary-400" id="res-wpm">
+              0 <span class="text-xs text-slate-500 font-normal">WPM</span>
+            </div>
+          </div>
+          <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+            <div class="text-[10px] text-slate-400 uppercase tracking-wider">
+              Accuracy
+            </div>
+            <div class="text-2xl font-bold text-primary-400" id="res-acc">
+              0%
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button
+            onclick="
+              app.closeModal();
+              app.handleBackNavigation();
+            "
+            class="flex-1 py-2.5 bg-slate-700 text-white text-sm rounded-lg font-medium hover:bg-slate-600 transition"
+          >
+            Menu
+          </button>
+          <button
+            onclick="
+              app.closeModal();
+              app.typingEngine.restart();
+            "
+            class="flex-1 py-2.5 bg-slate-600 text-white text-sm rounded-lg font-medium hover:bg-slate-500 transition"
+          >
+            Retry
+          </button>
+          <button
+            id="next-lesson-btn"
+            onclick="
+              app.closeModal();
+              app.startNextLesson();
+            "
+            class="flex-1 py-2.5 bg-primary-600 text-white text-sm rounded-lg font-medium hover:bg-primary-500 transition shadow-lg shadow-primary-900/40"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const krutiKeyMap = {
+        "`": ["`", "~"],
+        1: ["1", "!"],
+        2: ["2", "@"],
+        3: ["3", "#"],
+        4: ["4", "$"],
+        5: ["5", "%"],
+        6: ["6", "^"],
+        7: ["7", "&"],
+        8: ["8", "*"],
+        9: ["9", "("],
+        0: ["0", ")"],
+        "-": ["-", "_"],
+        "=": ["=", "+"],
+        q: ["ु", "फ़"],
+        w: ["ू", "ॅ"],
+        e: ["म", "म्"],
+        r: ["त", "त्"],
+        t: ["ज", "ज्"],
+        y: ["ल", "ल्"],
+        u: ["न", "न्"],
+        i: ["प", "प्"],
+        o: ["व", "व्"],
+        p: ["च", "च्"],
+        "[": ["ख", "ख्"],
+        "]": [",", "़"],
+        "\\": ["?", "ं"],
+        a: ["ं", "ँ"],
+        s: ["े", "ै"],
+        d: ["क", "क्"],
+        f: ["ि", "थ्"],
+        g: ["ह", "ळ"],
+        h: ["ी", "भ्"],
+        j: ["र", "श्र"],
+        k: ["ा", "ज्ञ"],
+        l: ["स", "स्"],
+        ";": ["य", "र्"],
+        "'": ["श", "श्"],
+        z: ["र्", "ज़"],
+        x: ["ग", "ग्"],
+        c: ["ब", "ब्"],
+        v: ["अ", "ट"],
+        b: ["इ", "ठ"],
+        n: ["द", "छ"],
+        m: ["उ", "ड"],
+        ",": ["ए", "ढ"],
+        ".": ["ण", "ण्"],
+        "/": ["ध", "ध्"],
+      };
+
+      const kbLayoutRows = [
+        [
+          "`",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "0",
+          "-",
+          "=",
+          "Backspace",
+        ],
+        [
+          "Tab",
+          "q",
+          "w",
+          "e",
+          "r",
+          "t",
+          "y",
+          "u",
+          "i",
+          "o",
+          "p",
+          "[",
+          "]",
+          "\\",
+        ],
+        [
+          "Caps",
+          "a",
+          "s",
+          "d",
+          "f",
+          "g",
+          "h",
+          "j",
+          "k",
+          "l",
+          ";",
+          "'",
+          "Enter",
+        ],
+        ["ShiftL", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "ShiftR"],
+        ["Space"],
+      ];
+
+      // Re-written lessons structured identically to easy typing software drills (Sonma/Typing Master)
+      const lessonsData = [
+        {
+          id: 1,
+          title: "Home Row Basics",
+          text: "a s d f g ; l k j h a s d f g ; l k j h a s d f g ; l k j h",
+        },
+        {
+          id: 2,
+          title: "Home Row Words",
+          text: "asdf ;lkj asdf ;lkj asdf ;lkj asdf ;lkj asdf ;lkj",
+        },
+        {
+          id: 3,
+          title: "Top Row Basics",
+          text: "q w e r t p o i u y q w e r t p o i u y q w e r t p o i u y",
+        },
+        {
+          id: 4,
+          title: "Top Row Words",
+          text: "qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu",
+        },
+        {
+          id: 5,
+          title: "Bottom Row Basics",
+          text: "z x c v b / . , m n z x c v b / . , m n z x c v b / . , m n",
+        },
+        {
+          id: 6,
+          title: "All Rows Practice",
+          text: "asdf qwer zxcv ;lkj poiu /.,m asdf qwer zxcv",
+        },
+        {
+          id: 7,
+          title: "Shift Keys (Half Letters)",
+          text: "A S D F G : L K J H A S D F G : L K J H",
+        },
+        {
+          id: 8,
+          title: "Basic Hindi Words (1)",
+          text: "jke dke gS jke dke gS jke dke gS jke dke gS",
+        },
+        {
+          id: 9,
+          title: "Basic Hindi Words (2)",
+          text: "lhrk lhrk xkuk xkuk lhrk xkuk lhrk xkuk lhrk xkuk",
+        },
+        {
+          id: 10,
+          title: "Simple Sentences",
+          text: "jke dke djrk gS lhrk xkuk xkrh gS jke dke djrk gS",
+        },
+      ];
+
+      const testCorpus = [
+        "Hkkjr O;kid vkSj fofo/krkvksa ls Hkjk ns\'k gSA bldh laLd`fr izkphu dky ls gh ,d rkds esa ca/kh gSA",
+        "vktdy deI;wVj ,d cgqr vko\';d e\'khu cu x;k gSA blds fcuk dksbZ Hkh dke lEHko ugha yxrkA",
+        "lewps fo\'o esa i;kZoj.k dh leL;k ,d xEHkhj <+x ys rh tk jgh gSA gesa isM+ yxkus pkfg,A",
+        "f\'k{kk ekuo ds fodkl ds fy, cgqr t:jh gSA ,d f\'kf{kr fO;fDr lekt dh lPph lsok dj ldrk gSA",
+        "jke vPNk yM+dk gSA og Ldwy tkrk gS vkSj eu yxkdj i<+rS gSA mldk HkkbZ Hkh egsurh gSA",
+      ];
+
+      const app = {
+        state: {
+          view: "dashboard",
+          mode: null,
+          currentLessonId: 1,
+          xp: 0,
+          streak: 0,
+          lastPlayedDate: null,
+          bestWpm: 0,
+          completedLessons: [],
+          avgAccArr: [],
+          soundEnabled: false,
+          vibEnabled: false,
+        },
+        audioCtx: null,
+
+        init() {
+          this.loadState();
+          this.bindEvents();
+          this.navigate("dashboard");
+        },
+
+        loadState() {
+          const saved = localStorage.getItem("krutiStateV4");
+          if (saved) {
+            try {
+              this.state = { ...this.state, ...JSON.parse(saved) };
+              const today = new Date().toDateString();
+              if (this.state.lastPlayedDate !== today) {
+                let yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                if (
+                  this.state.lastPlayedDate !== yesterday.toDateString() &&
+                  this.state.lastPlayedDate !== null
+                )
+                  this.state.streak = 0;
+                this.state.lastPlayedDate = today;
+                this.saveState();
+              }
+            } catch (e) {}
+          } else {
+            this.state.lastPlayedDate = new Date().toDateString();
+            this.saveState();
+          }
+        },
+
+        saveState() {
+          localStorage.setItem("krutiStateV4", JSON.stringify(this.state));
+          document.getElementById("mobile-nav-xp").innerText = this.state.xp;
+        },
+
+        bindEvents() {
+          document
+            .getElementById("mobile-menu-btn")
+            .addEventListener("click", () => this.toggleMobileMenu());
+          window.addEventListener("keydown", (e) => {
+            if (e.code === "Space" && e.target === document.body)
+              e.preventDefault();
+          });
+        },
+
+        toggleMobileMenu() {
+          document.getElementById("mobile-menu").classList.toggle("hidden");
+        },
+
+        navigate(view) {
+          this.state.view = view;
+          const container = document.getElementById("app-container");
+          container.innerHTML = "";
+          if (this.typingEngine.active && view !== "practice")
+            this.typingEngine.stop();
+          document.getElementById("mobile-menu").classList.add("hidden");
+
+          if (view === "dashboard") {
+            container.appendChild(
+              document.getElementById("tpl-dashboard").content.cloneNode(true),
+            );
+            this.updateDashboardUI();
+          } else if (
+            view === "lessons" ||
+            view === "tests" ||
+            view === "exam"
+          ) {
+            container.appendChild(
+              document.getElementById("tpl-list").content.cloneNode(true),
+            );
+            this.renderList(view);
+          } else if (view === "freetyping") {
+            container.appendChild(
+              document.getElementById("tpl-freetyping").content.cloneNode(true),
+            );
+          } else if (view === "cheatsheet") {
+            container.appendChild(
+              document.getElementById("tpl-cheatsheet").content.cloneNode(true),
+            );
+            this.populateCheatsheet();
+          } else if (view === "practice") {
+            container.appendChild(
+              document.getElementById("tpl-practice").content.cloneNode(true),
+            );
+            this.virtualKeyboard.render();
+            this.updatePreferenceIcons();
+          }
+        },
+
+        handleBackNavigation() {
+          if (this.state.mode === "lesson") this.navigate("lessons");
+          else this.navigate("dashboard");
+        },
+
+        updateDashboardUI() {
+          if (this.state.view !== "dashboard") return;
+          document.getElementById("stat-best-wpm").innerText =
+            this.state.bestWpm;
+          const avgAcc = this.state.avgAccArr.length
+            ? Math.round(
+                this.state.avgAccArr.reduce((a, b) => a + b, 0) /
+                  this.state.avgAccArr.length,
+              )
+            : 0;
+          document.getElementById("stat-avg-acc").innerText = avgAcc;
+          document.getElementById("stat-lessons").innerText =
+            this.state.completedLessons.length;
+          document.getElementById("stat-streak").innerText = this.state.streak;
+          document.getElementById("lesson-progress-bar").style.width =
+            `${(this.state.completedLessons.length / lessonsData.length) * 100}%`;
+        },
+
+        renderList(type) {
+          const container = document.getElementById("list-container");
+          const title = document.getElementById("list-title");
+
+          if (type === "lessons") {
+            title.innerHTML = `<i class="fa-solid fa-book text-primary-500"></i> Practice Lessons`;
+          } else if (type === "exam") {
+            title.innerHTML = `<i class="fa-solid fa-graduation-cap text-rose-500"></i> Exam Mode`;
+          } else {
+            title.innerHTML = `<i class="fa-solid fa-stopwatch text-purple-500"></i> Speed Tests`;
+          }
+
+          if (type === "lessons") {
+            lessonsData.forEach((lesson, i) => {
+              const isCompleted = this.state.completedLessons.includes(
+                lesson.id,
+              );
+              const isUnlocked =
+                i === 0 ||
+                this.state.completedLessons.includes(lessonsData[i - 1].id) ||
+                this.state.completedLessons.length >= i;
+              const div = document.createElement("div");
+              div.className = `p-4 rounded-xl border flex items-center transition-all ${isUnlocked ? "bg-slate-800 border-slate-700 cursor-pointer hover:border-primary-500" : "bg-slate-900 border-slate-800 opacity-50"}`;
+              if (isUnlocked) div.onclick = () => this.startLesson(lesson.id);
+              div.innerHTML = `
+                <div class="w-10 h-10 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold ${isCompleted ? "bg-primary-900/50 text-primary-400" : "bg-slate-700 text-slate-400"}">
+                  ${isCompleted ? '<i class="fa-solid fa-check"></i>' : isUnlocked ? i + 1 : '<i class="fa-solid fa-lock text-xs"></i>'}
+                </div>
+                <div><h3 class="font-bold text-white text-sm md:text-base">${lesson.title}</h3></div>
+              `;
+              container.appendChild(div);
+            });
+          } else {
+            [1, 2, 5, 10].forEach((min) => {
+              const div = document.createElement("div");
+              div.className =
+                "bg-slate-800 p-4 rounded-xl border border-slate-700 cursor-pointer flex items-center hover:border-primary-500 transition-colors";
+              div.onclick = () => this.startTest(min, type);
+              div.innerHTML = `
+                <div class="w-10 h-10 rounded-full bg-primary-900/40 text-primary-400 flex items-center justify-center mr-4 font-bold shrink-0">${min}</div>
+                <div><h3 class="font-bold text-white">${min} Minute ${type === "exam" ? "Exam" : "Test"}</h3></div>
+              `;
+              container.appendChild(div);
+            });
+          }
+        },
+
+        populateCheatsheet() {
+          const tbody = document.getElementById("chart-keys-body");
+          if (tbody) {
+            const rowsList = [
+              {
+                name: "Top",
+                keys: [
+                  "q",
+                  "w",
+                  "e",
+                  "r",
+                  "t",
+                  "y",
+                  "u",
+                  "i",
+                  "o",
+                  "p",
+                  "[",
+                  "]",
+                  "\\",
+                ],
+              },
+              {
+                name: "Home",
+                keys: ["a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'"],
+              },
+              {
+                name: "Bottom",
+                keys: ["z", "x", "c", "v", "b", "n", "m", ",", ".", "/"],
+              },
+            ];
+            rowsList.forEach((r) => {
+              r.keys.forEach((k) => {
+                if (krutiKeyMap[k]) {
+                  tbody.insertAdjacentHTML(
+                    "beforeend",
+                    `<tr class="hover:bg-slate-750 transition-colors"><td class="px-4 py-2.5 text-slate-400 text-xs">${r.name}</td><td class="px-4 py-2.5 font-mono bg-slate-900/30 font-bold">${k}</td><td class="px-4 py-2.5 kruti-text text-xl">${krutiKeyMap[k][0]}</td><td class="px-4 py-2.5 kruti-text text-xl text-primary-400">${krutiKeyMap[k][1]}</td></tr>`,
+                  );
+                }
+              });
+            });
+          }
+          const altContainer = document.getElementById("alt-codes-container");
+          if (altContainer && altContainer.innerHTML.trim() === "") {
+            const altCodes = [
+              { code: "0161", char: "ँ" },
+              { code: "0163", char: "१" },
+              { code: "0164", char: "२" },
+              { code: "0165", char: "३" },
+              { code: "0166", char: "४" },
+              { code: "0167", char: "५" },
+              { code: "0168", char: "६" },
+              { code: "0169", char: "७" },
+              { code: "0170", char: "८" },
+              { code: "0171", char: "९" },
+              { code: "0172", char: "०" },
+              { code: "0197", char: "ज्ञ" },
+              { code: "0216", char: "क्र" },
+              { code: "0170", char: "त्र" },
+              { code: "0221", char: "ट्र" },
+              { code: "0224", char: "ड्र" },
+              { code: "0228", char: "क्त" },
+              { code: "0182", char: "फ्" },
+              { code: "0204", char: "ृ" },
+              { code: "0207", char: "ड" },
+            ];
+            altCodes.forEach((item) => {
+              altContainer.insertAdjacentHTML(
+                "beforeend",
+                `<div class="bg-slate-800 p-3 flex justify-between items-center hover:bg-slate-750 transition-colors"><span class="text-xs text-slate-400 font-mono">Alt+${item.code}</span><span class="kruti-text text-2xl text-primary-400">${item.char}</span></div>`,
+              );
+            });
+          }
+        },
+
+        startLesson(id) {
+          this.state.mode = "lesson";
+          this.state.currentLessonId = id;
+          const lesson = lessonsData.find((l) => l.id === id);
+          this.navigate("practice");
+          document.getElementById("timer-container").classList.add("hidden");
+          this.typingEngine.init(lesson.text, 0);
+        },
+        startNextLesson() {
+          let nextId = this.state.currentLessonId + 1;
+          if (nextId > lessonsData.length) nextId = 1;
+          this.startLesson(nextId);
+        },
+        startTest(minutes, type) {
+          this.state.mode = type;
+          this.navigate("practice");
+          document.getElementById("timer-container").classList.remove("hidden");
+          let text = Array.from(
+            { length: minutes * 10 },
+            () => testCorpus[Math.floor(Math.random() * testCorpus.length)],
+          )
+            .join(" ")
+            .trim();
+          this.typingEngine.init(text, minutes * 60);
+        },
+        toggleVirtualKeyboard() {
+          const kb = document.getElementById("virtual-keyboard");
+          if (kb) kb.classList.toggle("hidden");
+        },
+
+        // Feedback Toggles
+        toggleSound() {
+          this.state.soundEnabled = !this.state.soundEnabled;
+          this.saveState();
+          this.updatePreferenceIcons();
+          if (this.state.soundEnabled) this.triggerSound(true); // demo beep
+        },
+        toggleVibration() {
+          this.state.vibEnabled = !this.state.vibEnabled;
+          this.saveState();
+          this.updatePreferenceIcons();
+          if (this.state.vibEnabled) this.triggerVibrate(true); // demo vib
+        },
+        updatePreferenceIcons() {
+          const sBtn = document.getElementById("btn-sound");
+          const vBtn = document.getElementById("btn-vibrate");
+          if (sBtn)
+            sBtn.innerHTML = this.state.soundEnabled
+              ? '<i class="fa-solid fa-volume-high text-primary-400"></i>'
+              : '<i class="fa-solid fa-volume-xmark"></i>';
+          if (vBtn)
+            vBtn.innerHTML = this.state.vibEnabled
+              ? '<i class="fa-solid fa-mobile text-primary-400"></i>'
+              : '<i class="fa-solid fa-mobile-screen"></i>';
+        },
+
+        // Audio & Vibrate Generation
+        triggerSound(isCorrect) {
+          if (!this.state.soundEnabled) return;
+          try {
+            if (!this.audioCtx)
+              this.audioCtx = new (
+                window.AudioContext || window.webkitAudioContext
+              )();
+            if (this.audioCtx.state === "suspended") this.audioCtx.resume();
+
+            const osc = this.audioCtx.createOscillator();
+            const gain = this.audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(this.audioCtx.destination);
+
+            if (isCorrect) {
+              osc.type = "sine";
+              osc.frequency.setValueAtTime(600, this.audioCtx.currentTime);
+              gain.gain.setValueAtTime(0.05, this.audioCtx.currentTime);
+              osc.start();
+              osc.stop(this.audioCtx.currentTime + 0.05);
+            } else {
+              osc.type = "sawtooth";
+              osc.frequency.setValueAtTime(150, this.audioCtx.currentTime);
+              gain.gain.setValueAtTime(0.1, this.audioCtx.currentTime);
+              osc.start();
+              osc.stop(this.audioCtx.currentTime + 0.15);
+            }
+          } catch (e) {
+            console.warn("Audio not supported");
+          }
+        },
+        triggerVibrate(isCorrect) {
+          if (!this.state.vibEnabled || !navigator.vibrate) return;
+          if (isCorrect) navigator.vibrate(20);
+          else navigator.vibrate([40, 30, 40]);
+        },
+
+        showResultModal(stats) {
+          const modal = document.getElementById("result-modal");
+          modal.classList.remove("hidden");
+          document.getElementById("res-wpm").innerText = stats.netWpm;
+          document.getElementById("res-acc").innerText = stats.accuracy + "%";
+
+          let xpGained = 0,
+            title = "Complete!",
+            icon = '<i class="fa-solid fa-check"></i>',
+            iconColor = "bg-primary-900/50 text-primary-400";
+
+          if (this.state.mode === "lesson") {
+            xpGained = 50;
+            icon = '<i class="fa-solid fa-star"></i>';
+            iconColor = "bg-yellow-900/50 text-yellow-400";
+            if (
+              !this.state.completedLessons.includes(this.state.currentLessonId)
+            ) {
+              this.state.completedLessons.push(this.state.currentLessonId);
+              xpGained += 50;
+            }
+            if (stats.accuracy >= 90) {
+              document
+                .getElementById("next-lesson-btn")
+                .classList.remove("hidden");
+            } else {
+              document
+                .getElementById("next-lesson-btn")
+                .classList.add("hidden");
+              title = "Try Again";
+              xpGained = 10;
+            }
+          } else {
+            document.getElementById("next-lesson-btn").classList.add("hidden");
+            xpGained = Math.floor(stats.netWpm);
+            if (stats.netWpm > this.state.bestWpm) {
+              this.state.bestWpm = stats.netWpm;
+              icon = '<i class="fa-solid fa-trophy"></i>';
+              iconColor = "bg-yellow-900/50 text-yellow-400";
+              title = "High Score!";
+            }
+          }
+
+          this.state.xp += xpGained;
+          if (stats.accuracy > 0) {
+            this.state.avgAccArr.push(stats.accuracy);
+            if (this.state.avgAccArr.length > 10) this.state.avgAccArr.shift();
+          }
+          if (this.state.streak === 0) this.state.streak = 1;
+          this.saveState();
+
+          document.getElementById("result-msg").innerText = `+${xpGained} XP`;
+          const iconEl = document.getElementById("result-icon");
+          iconEl.innerHTML = icon;
+          iconEl.className = `w-14 h-14 rounded-full flex items-center justify-center text-2xl mx-auto mb-3 ${iconColor}`;
+          document.getElementById("result-title").innerText = title;
+        },
+
+        closeModal() {
+          document.getElementById("result-modal").classList.add("hidden");
+        },
+      };
+
+      app.virtualKeyboard = {
+        render() {
+          const container = document.getElementById("virtual-keyboard");
+          if (!container) return;
+          container.innerHTML = "";
+          kbLayoutRows.forEach((row) => {
+            const rowDiv = document.createElement("div");
+            rowDiv.className = "keyboard-row";
+            row.forEach((keyId) => {
+              const keyDiv = document.createElement("div");
+              keyDiv.className = "key";
+              keyDiv.id = `vk-${keyId.toLowerCase()}`;
+              if (["Backspace", "Tab", "Enter", "Caps"].includes(keyId))
+                keyDiv.classList.add("key-wide");
+              if (keyId.startsWith("Shift")) keyDiv.classList.add("key-wider");
+              if (keyId === "Space") keyDiv.classList.add("key-space");
+
+              if (krutiKeyMap[keyId.toLowerCase()]) {
+                const [norm, shift] = krutiKeyMap[keyId.toLowerCase()];
+                keyDiv.innerHTML = `<span class="key-shift">${shift}</span><span class="key-main">${norm}</span><span class="key-sub hidden md:block">${keyId.toUpperCase()}</span>`;
+              } else {
+                keyDiv.innerHTML = `<span class="text-xs font-medium">${keyId.replace("L", "").replace("R", "")}</span>`;
+              }
+              rowDiv.appendChild(keyDiv);
+            });
+            container.appendChild(rowDiv);
+          });
+        },
+        highlightKey(char) {
+          document
+            .querySelectorAll(".key.highlight")
+            .forEach((el) => el.classList.remove("highlight"));
+          if (!char || app.state.mode === "exam") return;
+          let keyId = char.toLowerCase();
+          if (char === " ") keyId = "space";
+          if (char === "\n") keyId = "enter";
+          const el = document.getElementById(`vk-${keyId}`);
+          if (el) el.classList.add("highlight");
+          if (char !== char.toLowerCase()) {
+            const shiftL = document.getElementById("vk-shiftl");
+            if (shiftL) shiftL.classList.add("highlight");
+          }
+        },
+        animateKeyPress(key) {
+          let keyId = key.toLowerCase();
+          if (key === " ") keyId = "space";
+          if (key === "Backspace") keyId = "backspace";
+          const el = document.getElementById(`vk-${keyId}`);
+          if (el) {
+            el.classList.add("pressed");
+            setTimeout(() => el.classList.remove("pressed"), 100);
+          }
+        },
+      };
+
+      app.typingEngine = {
+        targetText: "",
+        characters: [],
+        currentIndex: 0,
+        errors: 0,
+        typedTotal: 0,
+        timeLimit: 0,
+        timeElapsed: 0,
+        timerInterval: null,
+        active: false,
+        started: false,
+        lastKeydown: { key: "", time: 0 },
+
+        init(text, limitSec = 0) {
+          this.targetText = text;
+          this.timeLimit = limitSec;
+          this.resetVars();
+          this.renderText();
+          const overlay = document.getElementById("typing-overlay");
+          if (overlay) overlay.classList.remove("hidden");
+
+          const container = document.getElementById("typing-area-wrapper");
+          if (container) container.onclick = () => this.startInput();
+
+          document.removeEventListener("keydown", this.keyHandlerRef);
+          this.keyHandlerRef = this.handleKeyDown.bind(this);
+          document.addEventListener("keydown", this.keyHandlerRef);
+
+          const hInput = document.getElementById("hidden-input");
+          if (hInput) {
+            hInput.oninput = (e) => {
+              const val = e.target.value;
+              e.target.value = "";
+              if (!val) return;
+
+              // Mobile keyboards may emit input without a keydown event. On a
+              // physical keyboard, keydown has already handled this character.
+              const isDuplicate =
+                val.length === 1 &&
+                val === this.lastKeydown.key &&
+                performance.now() - this.lastKeydown.time < 150;
+              if (isDuplicate) return;
+
+              [...val].forEach((character) => this.handleInput(character));
+            };
+          }
+        },
+        startInput() {
+          const hInput = document.getElementById("hidden-input");
+          if (hInput) hInput.focus();
+          const oLay = document.getElementById("typing-overlay");
+          if (!this.started && oLay && !oLay.classList.contains("hidden")) {
+            oLay.classList.add("hidden");
+
+            // Resume Audio Context cleanly on user gesture
+            if (app.state.soundEnabled && !app.audioCtx) {
+              app.audioCtx = new (
+                window.AudioContext || window.webkitAudioContext
+              )();
+            }
+            if (app.audioCtx && app.audioCtx.state === "suspended")
+              app.audioCtx.resume();
+
+            this.start();
+          }
+        },
+        resetVars() {
+          this.currentIndex = 0;
+          this.errors = 0;
+          this.typedTotal = 0;
+          this.timeElapsed = 0;
+          this.active = false;
+          this.started = false;
+          if (this.timerInterval) clearInterval(this.timerInterval);
+          this.updateStatsUI();
+          const pBar = document.getElementById("typing-progress-bar");
+          if (pBar) pBar.style.width = "0%";
+        },
+        start() {
+          this.started = true;
+          this.active = true;
+          this.updateTimerUI(this.timeLimit > 0 ? this.timeLimit : 0);
+          this.timerInterval = setInterval(() => {
+            this.timeElapsed++;
+            if (this.timeLimit > 0) {
+              const remaining = this.timeLimit - this.timeElapsed;
+              this.updateTimerUI(remaining);
+              if (remaining <= 0) this.finish();
+            } else {
+              this.updateTimerUI(this.timeElapsed);
+            }
+            this.updateStatsUI();
+          }, 1000);
+          this.updateCursor();
+        },
+        stop() {
+          this.active = false;
+          if (this.timerInterval) clearInterval(this.timerInterval);
+          document.removeEventListener("keydown", this.keyHandlerRef);
+        },
+        restart() {
+          this.stop();
+          this.resetVars();
+          this.renderText();
+          const overlay = document.getElementById("typing-overlay");
+          if (overlay) overlay.classList.remove("hidden");
+          app.virtualKeyboard.highlightKey(null);
+          const textContainer = document.getElementById("typing-container");
+          if (textContainer) textContainer.scrollTop = 0;
+        },
+        finish() {
+          this.stop();
+          app.showResultModal(this.getStats());
+        },
+        renderText() {
+          const container = document.getElementById("typing-container");
+          if (!container) return;
+          container.innerHTML = "";
+          this.characters = [];
+          this.targetText.split("").forEach((c, i) => {
+            const span = document.createElement("span");
+            span.innerText = c;
+            span.className = "char";
+            span.id = `char-${i}`;
+            container.appendChild(span);
+            this.characters.push(span);
+          });
+        },
+        handleKeyDown(e) {
+          if (!this.started) {
+            if (
+              ["Shift", "Control", "Alt", "Meta", "Capslock", "Tab"].includes(
+                e.key,
+              )
+            )
+              return;
+            this.startInput();
+          }
+          if (!this.active || e.ctrlKey || e.metaKey || e.altKey) return;
+          if (e.key.length === 1 || e.key === "Backspace" || e.key === " ")
+            e.preventDefault();
+          if (e.key.length === 1 || e.key === " ") {
+            this.lastKeydown = { key: e.key, time: performance.now() };
+          }
+          this.handleInput(e.key);
+        },
+        handleInput(key) {
+          if (!this.active) return;
+          app.virtualKeyboard.animateKeyPress(key);
+
+          if (key === "Backspace") {
+            if (this.currentIndex > 0) {
+              this.currentIndex--;
+              const span = this.characters[this.currentIndex];
+              if (span.classList.contains("incorrect")) {
+                this.errors = Math.max(0, this.errors - 1);
+              }
+              span.className = "char";
+              this.typedTotal = Math.max(0, this.typedTotal - 1);
+              this.updateCursor();
+              this.autoScroll(span);
+              this.updateStatsUI();
+            }
+            return;
+          }
+
+          if (key.length > 1 && key !== " ") return;
+          if (this.currentIndex >= this.targetText.length) {
+            if (this.timeLimit === 0) this.finish();
+            return;
+          }
+
+          const expected = this.targetText[this.currentIndex];
+          const span = this.characters[this.currentIndex];
+          this.typedTotal++;
+
+          if (app.state.mode === "exam") {
+            span.className = "char text-slate-200";
+            if (key !== expected) {
+              this.errors++;
+              app.triggerSound(false);
+              app.triggerVibrate(false);
+            } else {
+              app.triggerSound(true);
+              app.triggerVibrate(true);
+            }
+          } else {
+            if (key === expected) {
+              span.className = "char correct";
+              app.triggerSound(true);
+              app.triggerVibrate(true);
+            } else {
+              span.className = "char incorrect";
+              this.errors++;
+              app.triggerSound(false);
+              app.triggerVibrate(false);
+              // In both Test and Lesson modes, user can proceed despite error (Typing Master behavior)
+            }
+          }
+
+          this.currentIndex++;
+          this.updateCursor();
+          this.autoScroll(span);
+          if (
+            this.currentIndex >= this.targetText.length &&
+            this.timeLimit === 0
+          )
+            this.finish();
+        },
+        autoScroll(span) {
+          const tc = document.getElementById("typing-container");
+          if (tc && span) {
+            if (span.offsetTop > tc.scrollTop + tc.clientHeight - 40)
+              tc.scrollTop = span.offsetTop - tc.clientHeight / 2;
+            else if (span.offsetTop < tc.scrollTop + 20)
+              tc.scrollTop = Math.max(0, span.offsetTop - tc.clientHeight / 2);
+          }
+        },
+        updateCursor() {
+          const prev = document.querySelector(".char.active");
+          if (prev) prev.classList.remove("active");
+          if (this.currentIndex < this.characters.length) {
+            const cur = this.characters[this.currentIndex];
+            cur.classList.add("active");
+            app.virtualKeyboard.highlightKey(
+              this.targetText[this.currentIndex],
+            );
+          }
+          const pb = document.getElementById("typing-progress-bar");
+          if (pb)
+            pb.style.width = `${Math.floor((this.currentIndex / this.targetText.length) * 100)}%`;
+        },
+        updateTimerUI(seconds) {
+          const el = document.getElementById("live-time");
+          if (el)
+            el.innerText = `${Math.floor(seconds / 60)
+              .toString()
+              .padStart(2, "0")}:${(seconds % 60).toString().padStart(2, "0")}`;
+        },
+        updateStatsUI() {
+          const stats = this.getStats();
+          const wpm = document.getElementById("live-wpm"),
+            acc = document.getElementById("live-acc");
+          if (wpm) wpm.innerText = stats.netWpm;
+          if (acc) acc.innerText = stats.accuracy;
+        },
+        getStats() {
+          let minElapsed = this.timeElapsed / 60 || 0.01;
+          const grossWpm = Math.round(this.typedTotal / 5 / minElapsed);
+          let netWpm = Math.max(
+            0,
+            Math.round(grossWpm - this.errors / minElapsed),
+          );
+          let accuracy =
+            this.typedTotal > 0
+              ? Math.round(
+                  ((this.typedTotal - this.errors) / this.typedTotal) * 100,
+                )
+              : 100;
+          return {
+            grossWpm: isNaN(grossWpm) ? 0 : grossWpm,
+            netWpm: isNaN(netWpm) ? 0 : netWpm,
+            accuracy,
+            errors: this.errors,
+            timeElapsed: this.timeElapsed,
+          };
+        },
+      };
+
+      window.onload = () => app.init();
+    </script>
+  </body>
+</html>

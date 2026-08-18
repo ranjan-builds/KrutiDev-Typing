@@ -1,0 +1,20 @@
+{
+  "name": "Kruti Dev 010 Typing Master",
+  "short_name": "KrutiDev Master",
+  "description": "Practice Hindi typing with the Kruti Dev 010 keyboard layout.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
